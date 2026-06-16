@@ -37,7 +37,10 @@ def load_previous_jobs():
     if not os.path.exists(DATA_FILE):
         return {}
     with open(DATA_FILE, "r") as f:
-        return json.load(f)
+        try:
+            return json.load(f)
+        except json.JSONDecodeError:
+            return {}
 
 
 def save_jobs(jobs):
